@@ -2,254 +2,245 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <!-- Meta tags for social media banners -->
-  <meta name="description" content="Follow the Flow: Improving T2I Generation by Cleaning Token Representations and Mitigating Semantic Leakage through Detokenization.">
-  <meta property="og:title" content="Follow the Flow: On Information Flow Across Textual Tokens in Text-to-Image Models"/>
-  <meta property="og:description" content="Discover how detokenization—focusing on the most representative tokens—can improve image generation, as illustrated by our zebra and pink giraffe examples.">
+  <title>Follow the Flow: On Information Flow Across Textual Tokens in Text-to-Image Models</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bulma CSS for layout -->
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <!-- Meta tags for social media -->
+  <meta name="description" content="Follow the Flow: A study of how information flows between textual tokens in text-to-image models. Learn how detokenization and token filtering reduce errors and semantic leakage.">
+  <meta property="og:title" content="Follow the Flow – Token Flow in T2I Models"/>
+  <meta property="og:description" content="Discover how focusing on the most representative tokens (illustrated by our zebra and pink colored giraffe demos) can improve image generation and reduce semantic leakage in T2I models."/>
   <meta property="og:url" content="https://yourdomain.com/follow-the-flow"/>
   <meta property="og:image" content="static/image/your_banner_image.png" />
   <meta property="og:image:width" content="1200"/>
   <meta property="og:image:height" content="630"/>
-
-  <meta name="twitter:title" content="Follow the Flow: On Information Flow Across Textual Tokens in Text-to-Image Models">
-  <meta name="twitter:description" content="Explore our project demonstrating improved image generation through token cleaning and detokenization techniques.">
+  <meta name="twitter:title" content="Follow the Flow – Token Flow in T2I Models">
+  <meta name="twitter:description" content="Learn how detokenization and removing redundant tokens can enhance image generation in text-to-image models." >
   <meta name="twitter:image" content="static/images/your_twitter_banner_image.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="keywords" content="text-to-image, detokenization, semantic leakage, token representation, diffusion models">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="text-to-image, token flow, detokenization, semantic leakage, diffusion models">
 
-  <title>Follow the Flow: On Information Flow Across Textual Tokens in Text-to-Image Models</title>
-  <link rel="icon" type="image/x-icon" href="static/images/wave.ico">
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
-
-  <link rel="stylesheet" href="static/css/bulma.min.css">
-  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="static/css/index.css">
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
-  <script defer src="static/js/fontawesome.all.min.js"></script>
-  <script src="static/js/bulma-carousel.min.js"></script>
-  <script src="static/js/bulma-slider.min.js"></script>
-  <script src="static/js/index.js"></script>
+  <!-- Custom CSS inspired by rome.baulab.info -->
+  <style>
+    body {
+      font-family: 'Noto Sans', sans-serif;
+      line-height: 1.6;
+    }
+    /* Fullheight hero with background image (replace with your header image) */
+    .hero.is-fullheight {
+      background: url('static/images/header.jpg') center center/cover no-repeat;
+      position: relative;
+      color: white;
+    }
+    .overlay {
+      position: absolute;
+      top:0;
+      left:0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+    }
+    .hero-body {
+      position: relative;
+      z-index: 2;
+    }
+    /* Navigation styling */
+    nav.navbar {
+      background: rgba(0,0,0,0.7);
+    }
+    nav.navbar a.navbar-item {
+      color: white;
+    }
+    /* Section spacing */
+    section {
+      padding: 3rem 1.5rem;
+    }
+    .section-title {
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    /* Visual demo images */
+    .visual-demo img {
+      max-width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    /* Button styling */
+    .button.is-primary {
+      background-color: #3273dc;
+      border-color: transparent;
+    }
+    /* Footer styling */
+    footer {
+      background: #222;
+      color: #aaa;
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
 
-  <section class="hero">
+  <!-- Navigation Bar -->
+  <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="#home">
+        Follow the Flow
+      </a>
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navMenu">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div id="navMenu" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#abstract">Abstract</a>
+        <a class="navbar-item" href="#visual">Visual Demos</a>
+        <a class="navbar-item" href="#methodology">How It Works</a>
+        <a class="navbar-item" href="#results">Results</a>
+        <a class="navbar-item" href="#download">Download</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero is-fullheight" id="home">
+    <div class="overlay"></div>
     <div class="hero-body">
-      <div class="container is-max-desktop">
-        <div class="columns is-centered">
-          <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">Follow the Flow: On Information Flow Across Textual Tokens in Text-to-Image Models</h1>
-            <div class="is-size-5 publication-authors">
-              <span class="author-block">
-                <a href="https://yourinstitution.edu/~guykaplan" target="_blank">Guy Kaplan</a><sup>*</sup>,</span>
-              <span class="author-block">
-                <a href="https://yourinstitution.edu/~mtoker" target="_blank">Michael Toker</a><sup>*</sup>,</span>
-              <span class="author-block">
-                <a href="https://yourinstitution.edu/~yuvalreif" target="_blank">Yuval Reif</a>,</span>
-              <span class="author-block">
-                <a href="https://yourinstitution.edu/~yonatan" target="_blank">Yonatan Belinkov</a>,</span>
-              <span class="author-block">
-                <a href="https://yourinstitution.edu/~royschwartz" target="_blank">Roy Schwartz</a>
-              </span>
-            </div>
-
-            <div class="is-size-5 publication-authors">
-              <span class="author-block">Hebrew University of Jerusalem &amp; Technion – Israel Institute of Technology<br>Preprint</span>
-              <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
-            </div>
-
-            <div class="publication-links">
-              <!-- Paper PDF link -->
-              <span class="link-block">
-                <a href="static/pdfs/follow_the_flow.pdf" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                    <i class="fas fa-file-pdf"></i>
-                  </span>
-                  <span>Paper</span>
-                </a>
-              </span>
-
-              <!-- Supplementary PDF link -->
-              <span class="link-block">
-                <a href="static/pdfs/follow_the_flow_supplementary.pdf" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                    <i class="fas fa-file-pdf"></i>
-                  </span>
-                  <span>Supplementary</span>
-                </a>
-              </span>
-
-              <!-- Github link -->
-              <span class="link-block">
-                <a href="https://github.com/tokeron/lens" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                    <i class="fab fa-github"></i>
-                  </span>
-                  <span>Code</span>
-                </a>
-              </span>
-
-              <!-- ArXiv abstract link -->
-              <span class="link-block">
-                <a href="https://arxiv.org/abs/2410.05864" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                    <i class="ai ai-arxiv"></i>
-                  </span>
-                  <span>arXiv</span>
-                </a>
-              </span>
-            </div>
-          </div>
-        </div>
+      <div class="container has-text-centered">
+        <h1 class="title is-1">Follow the Flow</h1>
+        <h2 class="subtitle is-3">On Information Flow Across Textual Tokens in Text-to-Image Models</h2>
+        <p class="is-size-5">Understanding how detokenization and token filtering improve image generation by reducing semantic leakage and redundancy.</p>
       </div>
     </div>
   </section>
 
-  <!-- Teaser video replaced with Visual Demonstration Carousel -->
-  <section class="hero">
-    <div class="container is-max-desktop">
-      <div class="hero-body">
-        <div id="results-carousel" class="carousel results-carousel">
-          <!-- Zebra GIF: Main illustration for cleaning technique -->
-          <div class="item">
-            <img src="static/images/zebra.gif" alt="Zebra illustrating detokenization: Only 1 or 2 tokens are representative">
-            <h2 class="subtitle has-text-centered">Zebra: Detokenization Cleaning Technique</h2>
-          </div>
-          <!-- Pink Colored Giraffe GIF: Improved generation by avoiding redundant token decoding -->
-          <div class="item">
-            <img src="static/images/a_pink_colored_giraffe.gif" alt="A Pink Colored Giraffe illustrating improved generation by not decoding redundant tokens">
-            <h2 class="subtitle has-text-centered">A Pink Colored Giraffe: Avoiding Redundant Token Decoding</h2>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Paper abstract -->
-  <section class="section hero is-light">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
-          <h2 class="title is-3">Abstract</h2>
-          <div class="content has-text-justified">
-            <p>
-              Text-to-image (T2I) models often suffer from semantic leakage and redundant token representations. Our work investigates the flow of information across textual tokens and demonstrates that focusing on the most representative tokens can improve image generation. By removing non-representative tokens, we achieve a 21% reduction in errors, and by patching leaked representations with uncontextualized tokens, we mitigate semantic leakage by 85%. This project illustrates these techniques through in-depth analysis and visual demonstrations.
-            </p>
-          </div>
-        </div>
+  <!-- Abstract Section -->
+  <section id="abstract">
+    <div class="container">
+      <h2 class="title section-title">Abstract</h2>
+      <div class="content">
+        <p>
+          Text-to-Image (T2I) models often suffer from semantic leakage, incorrect feature binding, and omission of key concepts. Our work challenges the common assumption that all tokens equally represent their lexical items. We show that most of the meaningful information within a word is captured by just one or two tokens, while the remaining tokens are redundant. By removing these non-representative tokens, image generation errors are reduced by 21%. Furthermore, by patching leaked token representations with their uncontextualized counterparts, we mitigate semantic leakage by 85%.
+        </p>
       </div>
     </div>
   </section>
 
   <!-- Visual Demonstrations Section -->
-  <section class="section">
-    <div class="container is-max-desktop">
-      <h2 class="title is-3 has-text-centered">Visual Demonstrations</h2>
-      <div class="columns">
-        <div class="column">
-          <figure class="image">
-            <img src="static/images/zebra.gif" alt="Zebra illustrating detokenization: Only 1 or 2 tokens are representative">
-          </figure>
-          <p class="has-text-centered">Zebra: Detokenization Cleaning Technique</p>
-        </div>
-        <div class="column">
-          <figure class="image">
-            <img src="static/images/a_pink_colored_giraffe.gif" alt="A Pink Colored Giraffe illustrating improved generation by not decoding redundant tokens">
-          </figure>
-          <p class="has-text-centered">A Pink Colored Giraffe: Avoiding Redundant Token Decoding</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Additional Image Carousel (optional) -->
-  <section class="hero is-small">
-    <div class="hero-body">
-      <div class="container">
-        <div id="results-carousel" class="carousel results-carousel">
-          <div class="item">
-            <img src="static/images/carousel1.jpg" alt="Additional image 1">
-            <h2 class="subtitle has-text-centered">Image 1 Description</h2>
-          </div>
-          <div class="item">
-            <img src="static/images/carousel2.jpg" alt="Additional image 2">
-            <h2 class="subtitle has-text-centered">Image 2 Description</h2>
-          </div>
-          <div class="item">
-            <img src="static/images/carousel3.jpg" alt="Additional image 3">
-            <h2 class="subtitle has-text-centered">Image 3 Description</h2>
-          </div>
-          <div class="item">
-            <img src="static/images/carousel4.jpg" alt="Additional image 4">
-            <h2 class="subtitle has-text-centered">Image 4 Description</h2>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Youtube video presentation -->
-  <section class="hero is-small is-light">
-    <div class="hero-body">
-      <div class="container">
-        <h2 class="title is-3">Video Presentation</h2>
-        <div class="columns is-centered has-text-centered">
-          <div class="column is-four-fifths">
-            <div class="publication-video">
-              <iframe src="https://www.youtube.com/embed/JkaxUblCGz0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Paper poster -->
-  <section class="hero is-small is-light">
-    <div class="hero-body">
-      <div class="container">
-        <h2 class="title">Poster</h2>
-        <iframe src="static/pdfs/sample.pdf" width="100%" height="550"></iframe>
-      </div>
-    </div>
-  </section>
-
-  <!-- BibTeX citation -->
-  <section class="section" id="BibTeX">
-    <div class="container is-max-desktop content">
-      <h2 class="title">BibTeX</h2>
-      <pre><code>
-@misc{kaplan2024follow,
-  title={Follow the Flow: On Information Flow Across Textual Tokens in Text-to-Image Models},
-  author={Kaplan, Guy and Toker, Michael and Reif, Yuval and Belinkov, Yonatan and Schwartz, Roy},
-  year={2024},
-  publisher={Preprint},
-  url={https://yourdomain.com/follow-the-flow}
-}
-      </code></pre>
-    </div>
-  </section>
-
-  <footer class="footer">
+  <section id="visual" class="has-background-light">
     <div class="container">
-      <div class="columns is-centered">
-        <div class="column is-8">
-          <div class="content">
-            <p>
-              This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
-              You are free to borrow the source code of this website, we just ask that you link back to this page in the footer.<br>
-              This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
-            </p>
-          </div>
+      <h2 class="title section-title">Visual Demonstrations</h2>
+      <div class="columns is-vcentered">
+        <!-- Zebra GIF: Cleaning/Detokenization -->
+        <div class="column visual-demo">
+          <figure class="image">
+            <img src="static/images/zebra.gif" alt="Zebra demonstrating detokenization: only 1 or 2 tokens are representative">
+          </figure>
+          <p class="has-text-centered">Zebra: Illustrating the cleaning technique where only 1–2 tokens are representative.</p>
+        </div>
+        <!-- Pink Colored Giraffe GIF: Avoiding Redundant Tokens -->
+        <div class="column visual-demo">
+          <figure class="image">
+            <img src="static/images/a_pink_colored_giraffe.gif" alt="Pink colored giraffe demonstrating improved generation by avoiding redundant tokens">
+          </figure>
+          <p class="has-text-centered">Pink Colored Giraffe: Demonstrating improved image generation by not decoding redundant tokens.</p>
         </div>
       </div>
     </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section id="methodology">
+    <div class="container">
+      <h2 class="title section-title">How It Works</h2>
+      <div class="content">
+        <p>
+          Our method involves two complementary analyses:
+        </p>
+        <ul>
+          <li>
+            <strong>In-item Information Flow:</strong> We use a causal intervention on the text encoder to isolate each token’s contribution within a lexical item. Our experiments reveal that most meaningful information is concentrated in one or two tokens, while the others are redundant.
+          </li>
+          <li>
+            <strong>Inter-item Information Flow:</strong> We analyze how tokens from different lexical items interact. In cases of semantic leakage—where one token’s representation is influenced by another—we mitigate the effect by replacing the leaked representation with its uncontextualized version.
+          </li>
+        </ul>
+        <p>
+          This approach improves the alignment between textual prompts and generated images, reducing errors and enhancing overall generation quality.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Results Section -->
+  <section id="results" class="has-background-light">
+    <div class="container">
+      <h2 class="title section-title">Results</h2>
+      <div class="content">
+        <ul>
+          <li>Removing non-representative tokens reduces image generation errors by <strong>21%</strong>.</li>
+          <li>Patching leaked token representations mitigates semantic leakage by <strong>85%</strong>.</li>
+          <li>Analysis shows that a lexical item is typically fully represented by just one or two tokens.</li>
+          <li>Our evaluation using vision-language models confirms the robustness of our intervention.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Download and Links Section -->
+  <section id="download">
+    <div class="container">
+      <h2 class="title section-title">Get the Paper</h2>
+      <div class="buttons is-centered">
+        <a href="static/pdfs/follow_the_flow.pdf" target="_blank" class="button is-primary">
+          <span class="icon"><i class="fas fa-file-pdf"></i></span>
+          <span>Download Paper</span>
+        </a>
+        <a href="static/pdfs/follow_the_flow_supplementary.pdf" target="_blank" class="button is-link">
+          <span class="icon"><i class="fas fa-file-pdf"></i></span>
+          <span>Supplementary Material</span>
+        </a>
+        <a href="https://github.com/tokeron/lens" target="_blank" class="button is-info">
+          <span class="icon"><i class="fab fa-github"></i></span>
+          <span>View Code</span>
+        </a>
+        <a href="https://arxiv.org/abs/2410.05864" target="_blank" class="button is-danger">
+          <span class="icon"><i class="ai ai-arxiv"></i></span>
+          <span>arXiv</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      &copy; 2025 Follow the Flow. Developed by Guy Kaplan, Michael Toker, Yuval Reif, Yonatan Belinkov, and Roy Schwartz.
+    </p>
+    <p>
+      This work is licensed under the <a href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" style="color: #ccc;">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+    </p>
   </footer>
 
+  <!-- JavaScript for Navbar Burger (for mobile responsiveness) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+      if (navbarBurgers.length > 0) {
+        navbarBurgers.forEach(el => {
+          el.addEventListener('click', () => {
+            const target = el.dataset.target;
+            const $target = document.getElementById(target);
+            el.classList.toggle('is-active');
+            $target.classList.toggle('is-active');
+          });
+        });
+      }
+    });
+  </script>
 </body>
 </html>
