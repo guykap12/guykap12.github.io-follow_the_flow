@@ -117,11 +117,13 @@
     <div class="hero-body">
       <video poster="" id="tree" autoplay controls muted loop height="100%">
         <!-- Your video here -->
-        <source src="static/videos/zebra.mp4"
-        type="video/mp4">
+        <source src="static/videos/zebra.mp4" type="video/mp4">
       </video>
       <h2 class="subtitle has-text-centered">
-        Aliquam vitae elit ullamcorper tellus egestas pellentesque. Ut lacus tellus, maximus vel lectus at, placerat pretium mi. Maecenas dignissim tincidunt vestibulum. Sed consequat hendrerit nisl ut maximus. 
+        <strong>Eliminating Semantic Leakage with Uncontextualized Representations</strong><br>
+        When generating an image from the full prompt “a standing zebra to the right of a bus station”, the model mistakenly renders a crosswalk instead of a zebra. 
+        However, using the concise prompt <span style="color: green;">“standing zebra”</span> correctly captures the animal. 
+        Replacing the leaked concept with its uncontextualized representation then yields the desired image.
       </h2>
     </div>
   </div>
