@@ -263,7 +263,36 @@
 </section>
 <!-- End Inter-Item Analysis Section -->
 
-  
+<!-- Catastrophic Negligence Section -->
+<section class="catastrophic-negligence" style="margin-bottom: 2rem;">
+  <div class="container is-max-desktop">
+    <div class="content">
+      <h2>Catastrophic Negligence</h2>
+      <p>
+        Catastrophic negligence refers to cases where a concept or entity is entirely missing from the generated image. 
+        While <em>Attend-and-Excite</em> (Chefer et al., 2023a) increases attention to the neglected item, this approach 
+        assumes the model has learned the concept in the first place.
+      </p>
+      <p>
+        Our analysis shows that in about <strong>7%</strong> of cases, the intended item is absent despite being 
+        meaningfully encoded. Using <em>Patchscopes</em> (Ghandeharioun et al., 2024) to interpret the encoded 
+        representations reveals that the concept is understood by the text encoder, but it fails to appear in the final 
+        image—likely due to insufficient training examples or difficulty rendering certain entities. Notably, negation 
+        and numbers are especially prone to such failures.
+      </p>
+      <figure>
+        <!-- Replace 'static/images/Catastrophic_negligence.png' with your actual file path -->
+        <img src="static/images/Catastrophic_negligence.png" alt="Cases where the text encoder understands the concept but the final image omits it entirely.">
+        <figcaption>
+          Examples of catastrophic negligence. The first row shows images generated from a single token, 
+          the second row is Patchscopes’ textual explanation, and the third row shows the full prompt’s result. 
+          Even though the text encoder understands “tuba,” “without,” or “7,” the model fails to render them correctly.
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+<!-- End Catastrophic Negligence Section -->
 
 <!-- Supplementary: In-Item Token Distribution Section -->
 <section class="supplementary in-item-tokens" style="margin-bottom: 2rem;">
@@ -271,7 +300,7 @@
     <div class="content">
       <h2>Supplementary: In-Item Token Distribution</h2>
       <p>
-        To further illustrate how concepts are split across multiple tokens, we showcase a GIF highlighting 
+        To further illustrate how concepts are split across multiple tokens, we showcase those
         qualitative examples. Each frame demonstrates how certain tokens may fully capture a concept while 
         others remain empty or only partially convey it. 
       </p>
