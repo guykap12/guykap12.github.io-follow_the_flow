@@ -196,10 +196,7 @@ We demonstrate the redundancy of these tokens by removing them after textual enc
       <div class="content">
         <h2>Tracing Token Representations in the Text Encoder</h2>
         <p>
-          We analyze how information is distributed within each lexical item by generating images from individual token representations. Our experiments show that for most words or expressions, only one or two tokens effectively carry the meaning, while the rest are largely redundant.
-        </p>
-        <p>
-          By masking out these non-representative tokens before image generation, we not only maintain the intended visual output but often see improvements in accuracy—with a notable 21% error reduction. This confirms that a more focused token representation better aligns the generated image with the original prompt.
+          We analyze how information is distributed within each lexical item by generating images from individual token representations. 
         </p>
         <figure>
           <img src="static/images/analysis_in_item.png" alt="Visualization of individual token representations within a lexical item.">
@@ -207,13 +204,16 @@ We demonstrate the redundancy of these tokens by removing them after textual enc
             Analysis of in-item information flow: Only select tokens capture the full semantic load of the lexical item.
           </figcaption>
         </figure>
+        <p>          
+          Our experiments show that for most words or expressions, only one or two tokens effectively carry the full meaning.
+        </p>
         <figure>
           <img src="static/images/repreentative_tokens.jpeg" alt="Highlighted representative tokens among all token representations.">
           <figcaption>
             Typically, one or two tokens are representative while others are redundant.
           </figcaption>
         </figure>
-              <p>
+      <p>
         To further validate this observation, we remove the unrepresentative (redundant) tokens and regenerate the image. The results confirm that omitting these tokens not only reproduces the original image but can also improve aspects like attribute binding.
       </p>
       <figure>
