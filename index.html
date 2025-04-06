@@ -125,7 +125,8 @@
           <h2 class="title is-3">Abstract</h2>
           <div class="content has-text-justified">
             <p>
-              Text-to-image models can suffer from semantic leakage, misbinding of attributes, and omissions of key concepts. In our work, we study how information flows across textual tokens during encoding. Our findings reveal that most lexical items are effectively represented by only one or two tokens, with the remaining tokens often redundant. By removing these non-representative tokens, we achieve a 21% reduction in generation errors. Furthermore, when contextual interference causes semantic leakage between unrelated items, we propose a training-free intervention—patching the leaked representation with its uncontextualized form—which reduces leakage by 85%. This dual approach not only clarifies the internal workings of T2I models but also offers practical methods to enhance image–text alignment.
+              Natural language is composed of words, but modern large language models (LLMs) process sub-words as input. A natural question raised by this discrepancy is whether LLMs encode words internally, and if so how. We present evidence that LLMs engage in an intrinsic detokenization process, where sub-word sequences are combined into coherent whole-word representations at their last token. Our experiments show that this process primarily takes place within the early and middle layers of the model. We further demonstrate its robustness to arbitrary splits (e.g., ``cats'' to ``ca'' and ``ts''), typos, and importantly---to out-of-vocabulary words: when feeding the last token internal representations of such words to the model as input, it can 
+``understand'' them as the complete word despite never seeing such representations as input during training. Our findings suggest that LLMs maintain a latent vocabulary beyond the tokenizer's scope. These insights provide a practical, finetuning-free application for expanding the vocabulary of pre-trained models. By enabling the addition of new vocabulary words, we reduce input length and inference iterations, which reduces both space and model latency, with little to no loss in model accuracy.            
             </p>
           </div>
         </div>
@@ -139,15 +140,13 @@
       <h2 class="title is-3">Key Findings</h2>
       <div class="content">
         <ul>
-          <li><strong>Concentrated Information:</strong> In 89% of cases, a lexical item’s meaning is concentrated in just one or two tokens.</li>
+          <li><strong>Concentrated Information:</strong> In most cases, a lexical item’s meaning is concentrated in just one or two tokens.</li>
           <li><strong>Redundancy Reduction:</strong> Removing redundant tokens improves image generation accuracy, lowering errors by 21%.</li>
-          <li><strong>Semantic Leakage:</strong> In 11% of cases, tokens unintentionally leak information between unrelated items, leading to misinterpretations.</li>
+          <li><strong>Semantic Leakage:</strong> In 11% of cases, tokens unintentionally leak information between unrelated items, potentially leading to misinterpretations.</li>
           <li><strong>Effective Patching:</strong> Replacing leaked token representations with their uncontextualized versions mitigates semantic leakage by 85%.</li>
           <li><strong>Efficient Token Identification:</strong> A simple k-NN classifier predicts redundant tokens with 92% precision, enabling practical improvements in T2I pipelines.</li>
+          <li><strong>Catastrophic Negligence:</strong> In about 7% of cases, a lexical item is accurately encoded but fails to appear in the final image, highlighting a disconnect between the encoder and the decoder.</li>
         </ul>
-        <p>
-          Whether you’re a technical reader or simply curious about how images are generated from text, these insights offer both a deep dive into model internals and actionable strategies to improve visual outputs.
-        </p>
       </div>
     </div>
   </section>
