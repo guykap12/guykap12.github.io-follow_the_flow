@@ -111,7 +111,7 @@
       </video>
       <h2 class="subtitle has-text-centered">
         <strong>Eliminating Semantic Leakage with Uncontextualized Representations</strong><br>
-        When generating an image from the full prompt “a standing zebra to the right of a bus station”, the model mistakenly renders a crosswalk instead of a <span style="color: red;">“standing zebra”</span>. 
+        When generating an image from the full prompt “a standing zebra to the right of a bus station”, the model mistakenly renders a <span style="color: red;">crosswalk</span> instead of a zebra. 
         However, using the concise prompt <span style="color: green;">“standing zebra”</span> correctly captures the animal. 
         Replacing the leaked concept with its uncontextualized representation then yields the desired image.
       </h2>
@@ -136,26 +136,36 @@
     </div>
   </section>
 
-  <!-- Visual Demonstrations Section -->
-  <section class="section">
-    <div class="container is-max-desktop">
-      <h2 class="title is-3 has-text-centered">Visual Demonstrations</h2>
-      <div class="columns">
-        <div class="column">
-          <figure class="image">
-            <img src="static/images/zebra.gif" alt="Zebra illustrating detokenization: Only 1 or 2 tokens are representative">
-          </figure>
-          <p class="has-text-centered">Zebra: Detokenization Cleaning Technique</p>
-        </div>
-        <div class="column">
-          <figure class="image">
-            <img src="static/images/a_pink_colored_giraffe.gif" alt="A Pink Colored Giraffe illustrating improved generation by not decoding redundant tokens">
-          </figure>
-          <p class="has-text-centered">A Pink Colored Giraffe: Avoiding Redundant Token Decoding</p>
-        </div>
-      </div>
+  <!-- Motivation Section -->
+<section class="motivation">
+  <div class="container is-max-desktop">
+    <div class="content">
+      <h2>Motivation</h2>
+      <p>
+        Despite the impressive advances in text-to-image models, several key issues still persist:
+      </p>
+      <ul>
+        <li>
+          <strong>Semantic Leakage:</strong> For example, a prompt like “a bat flying in a baseball stadium” can result in an image featuring a baseball bat instead of the animal.
+        </li>
+        <li>
+          <strong>Missing Attribute Binding:</strong> In prompts such as “a yellow flamingo and a pink sunflower,” the model may incorrectly mix attributes, failing to correctly associate each attribute with its intended subject.
+        </li>
+        <li>
+          <strong>Catastrophic Neglect:</strong> Sometimes, essential elements from the prompt are completely omitted from the generated image.
+        </li>
+      </ul>
+      <p>
+        Traditionally, most approaches have addressed these challenges from the diffusion model's perspective—by tweaking the cross-attention mechanism or optimizing image latents. While these methods can mitigate certain errors, they do not solve all cases.
+      </p>
+      <p>
+        This observation raises a fundamental question: <em>Could these issues originate earlier in the pipeline, within the text encoder itself?</em>
+      </p>
     </div>
-  </section>
+  </div>
+</section>
+<!-- End Motivation Section -->
+
 
   <!-- Additional Image Carousel (optional) -->
   <section class="hero is-small">
