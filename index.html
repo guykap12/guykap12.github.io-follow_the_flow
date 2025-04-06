@@ -136,7 +136,7 @@
     </div>
   </section>
 
-  <!-- Motivation Section -->
+<!-- Motivation Section -->
 <section class="motivation">
   <div class="container is-max-desktop">
     <div class="content">
@@ -146,13 +146,13 @@
       </p>
       <ul>
         <li>
-          <strong>Semantic Leakage:</strong> For example, a prompt like “a bat flying in a baseball stadium” can result in an image featuring a baseball bat instead of the animal.
+          <strong>Semantic Leakage:</strong> For example, a prompt like “a person wearing a cone hat is eating” can mistakenly merge the concept of the hat with the act of eating—generating an ice-cream cone hat.
         </li>
         <li>
-          <strong>Missing Attribute Binding:</strong> In prompts such as “a yellow flamingo and a pink sunflower,” the model may incorrectly mix attributes, failing to correctly associate each attribute with its intended subject.
+          <strong>Missing Attribute Binding:</strong> In prompts such as “a pink colored giraffe,” the model may fail to accurately apply the pink attribute to the giraffe, generating a normal giraffe instead.
         </li>
         <li>
-          <strong>Catastrophic Neglect:</strong> Sometimes, essential elements from the prompt are completely omitted from the generated image.
+          <strong>Catastrophic Neglect:</strong> Sometimes, as with “a tuba made of flower petals,” the primary object (the tuba) may be completely omitted, leaving only flower petals in the resulting image.
         </li>
       </ul>
       <p>
@@ -161,6 +161,15 @@
       <p>
         This observation raises a fundamental question: <em>Could these issues originate earlier in the pipeline, within the text encoder itself?</em>
       </p>
+      <figure class="example-issues">
+        <img src="static/images/generation_issues.png"
+             alt="Examples illustrating semantic leakage, missing attribute binding, and catastrophic neglect.">
+        <figcaption class="has-text-centered">
+          Left: “a tuba made of flower petals” (the tuba is neglected).<br>
+          Middle: “a pink colored giraffe” (attribute binding is missing).<br>
+          Right: “a person wearing cone hat is eating” (semantic leakage from eating to the cone hat).
+        </figcaption>
+      </figure>
     </div>
   </div>
 </section>
