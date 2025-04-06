@@ -175,6 +175,49 @@
 </section>
 <!-- End Motivation Section -->
 
+<!-- In-Item Analysis Section -->
+<section class="in-item-analysis">
+  <div class="container is-max-desktop">
+    <div class="content">
+      <h2>Tracing Token Representations in the Text Encoder</h2>
+      <p>
+        Building on our motivation, we investigate whether the issues in image generation originate from the text encoder. To do so, we generate images for each token’s contextualized representation, allowing us to trace what each token contributes.
+      </p>
+      <p>
+        As shown in the analysis below, we isolate each token from a lexical item and generate its corresponding image. This process reveals that only a subset of tokens effectively represents the intended concept.
+      </p>
+      <figure>
+        <!-- Analysis of in-item token representations -->
+        <img src="static/images/analysis_in_item.png" alt="Visualization of individual token representations within a lexical item.">
+        <figcaption>
+          Analysis of in-item information flow: Each token’s contextual representation is visualized to determine its contribution.
+        </figcaption>
+      </figure>
+      <p>
+        In our findings, only the representative tokens—those that capture the core meaning—contribute to generating the intended image. The remaining tokens, as highlighted in the view below, appear redundant.
+      </p>
+      <figure>
+        <!-- Representative tokens highlighted -->
+        <img src="static/images/representative_tokens.jpeg" alt="Highlighted representative tokens among all token representations.">
+        <figcaption>
+          Only a subset of tokens are representative of the lexical item’s concept.
+        </figcaption>
+      </figure>
+      <p>
+        To further validate this observation, we remove the unrepresentative (redundant) tokens and regenerate the image. The results confirm that omitting these tokens not only reproduces the original image but can also improve aspects like attribute binding.
+      </p>
+      <figure>
+        <!-- Redundant token removal examples -->
+        <embed src="static/images/redundant_removal.pdf" type="application/pdf" width="100%" height="500px" />
+        <figcaption>
+          Redundant token removal: Masking out unrepresentative tokens produces images that maintain or even enhance the original output.
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+<!-- End In-Item Analysis Section -->
+
 
   <!-- Additional Image Carousel (optional) -->
   <section class="hero is-small">
