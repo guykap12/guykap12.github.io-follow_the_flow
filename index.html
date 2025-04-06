@@ -151,31 +151,44 @@
     </div>
   </section>
 
-  <!-- Motivation Section -->
-  <section class="motivation">
-    <div class="container is-max-desktop">
-      <div class="content">
-        <h2>Motivation</h2>
-        <p>
-          Despite impressive advances, text-to-image models still encounter challenges such as missing attribute binding, semantic leakage, and catastrophic neglect. Traditional methods often focus solely on tweaking the diffusion or attention mechanisms. Our work, however, examines the text encoder—the very first step—revealing that many errors originate from redundant or misaligned token representations. Understanding and intervening at this stage can dramatically improve the generated image quality.
-        </p>
-        <ul>
-          <li>
-            <strong>Missing Attribute Binding:</strong> For instance, a “pink colored giraffe” might produce a standard giraffe if the attribute isn’t correctly bound.
-          </li>
-          <li>
-            <strong>Semantic Leakage:</strong> A prompt such as “a person wearing a cone hat is eating” may merge unrelated concepts, causing visual misinterpretation.
-          </li>
-          <li>
-            <strong>Catastrophic Negligence:</strong> Some key concepts might be entirely omitted despite being well-represented in the text.
-          </li>
-        </ul>
-        <p>
-          Our approach uncovers that these issues stem largely from the internal token processing and offers a new perspective for enhancing T2I model reliability.
-        </p>
-      </div>
+<!-- Motivation Section -->
+<section class="motivation">
+  <div class="container is-max-desktop">
+    <div class="content">
+      <h2>Motivation</h2>
+      <p>
+        Despite the impressive advances in text-to-image models, several key issues still persist:
+      </p>
+      <ul>
+        <li>
+          <strong>Missing Attribute Binding:</strong> In prompts such as “a pink colored giraffe,” the model may fail to accurately apply the pink attribute to the giraffe, generating a normal giraffe instead.
+        </li>
+        <li>
+          <strong>Semantic Leakage:</strong> For example, a prompt like “a person wearing a cone hat is eating” can mistakenly merge the concept of the hat with the act of eating—generating an ice-cream cone hat.
+        </li>
+        <li>
+          <strong>Catastrophic Neglect:</strong> Sometimes, as with “a tuba made of flower petals,” the primary object (the tuba) may be completely omitted, leaving only flower petals in the resulting image.
+        </li>
+      </ul>
+      <p>
+        Traditionally, most approaches have addressed these challenges from the diffusion model's perspective—by tweaking the cross-attention mechanism or optimizing image latents. While these methods can mitigate certain errors, they do not solve all cases.
+      </p>
+      <p>
+        This observation raises a fundamental question: <em>Could these issues originate earlier in the pipeline, within the text encoder itself?</em>
+      </p>
+      <figure class="example-issues">
+        <img src="static/images/generation_issues.png"
+             alt="Examples illustrating semantic leakage, missing attribute binding, and catastrophic neglect.">
+        <figcaption class="has-text-centered">
+          Left: “a tuba made of flower petals” (the tuba is neglected).<br>
+          Middle: “a pink colored giraffe” (attribute binding is missing).<br>
+          Right: “a person wearing cone hat is eating” (semantic leakage from eating to the cone hat).
+        </figcaption>
+      </figure>
     </div>
-  </section>
+  </div>
+</section>
+<!-- End Motivation Section -->
 
   <!-- In-Item Analysis Section -->
   <section class="in-item-analysis" style="margin-bottom: 2rem;">
@@ -200,6 +213,16 @@
             Typically, one or two tokens are representative while others are redundant.
           </figcaption>
         </figure>
+              <p>
+        To further validate this observation, we remove the unrepresentative (redundant) tokens and regenerate the image. The results confirm that omitting these tokens not only reproduces the original image but can also improve aspects like attribute binding.
+      </p>
+      <figure>
+        <!-- Redundant token removal examples (converted to a regular image) -->
+        <img src="static/images/redundant_removal.png" alt="Redundant removal qualitative results">
+        <figcaption>
+          Redundant token removal: Masking out unrepresentative tokens produces images that maintain or even enhance the original output.
+        </figcaption>
+      </figure>
       </div>
     </div>
   </section>
@@ -210,23 +233,36 @@
       <div class="content">
         <h2>Information Flow Between Lexical Items</h2>
         <p>
-          Beyond individual words, our work examines how different lexical items interact during encoding. In 89% of cases, items remain independent; however, in the remaining 11%, unwanted semantic leakage occurs—for example, the word “pool” may inadvertently adopt features of “table,” leading to a pool table effect.
-        </p>
-        <p>
-          We propose a simple yet effective method: by re-encoding the suspected leaked token in isolation and patching it into the prompt’s representation, we reduce semantic leakage errors by 85%. This approach demonstrates that addressing the issue at the token level—in the text encoder—can significantly improve overall generation quality.
+          Beyond individual tokens, our work examines how different lexical items interact during encoding. In 89% of cases, items remain independent; however, in the remaining 11%, uninteded interactions occurs—for example, the word “bats” may inadvertently adopt features of “baseball,” leading to a generate a baseball bat instead of the animals "bats".
         </p>
         <figure>
           <img src="static/images/items_flow.png" alt="Examples of information flow between items.">
-          <figcaption>
-            Top: Correct information flow between items. Bottom: Unintended leakage where one item influences another.
-          </figcaption>
+        <figcaption>
+          <strong> Examples of information flow between items. </strong>
+          Top: Images generated from a 
+          <span style="color: purple;">lexical item</span> 
+          encoded alongside 
+          <span style="color: blue;">another item</span> 
+          that alters its representation. 
+          Bottom: Images generated from the uncontextualized representation of the same lexical item. 
+          The first three images (from the left) demonstrate correct information flow, while the last image (far right) demonstrates incorrect information flow.
+        </figcaption>
         </figure>
+        <p>
+          We propose a simple yet effective method: by re-encoding the suspected leaked token in isolation and <em>patching</em> it into the prompt’s representation, we reduce semantic leakage errors by 85%. This approach demonstrates that addressing the issue at the token level—in the text encoder—can significantly improve overall generation quality.
+        </p>
         <figure>
           <img src="static/images/cleaning_method.png" alt="Method for removing semantic leakage by replacing the leaked concept representation.">
-          <figcaption>
-            Replacing leaked representations with their uncontextualized counterparts effectively restores the intended meaning.
-          </figcaption>
+        <figcaption>
+          <strong> Removing semantic leakage by replacing the contextually leaked concept representation. </strong>
+          (1) Regular generation produces an image showing a crosswalk to the right of a bus station. 
+          (2) Generation from the prompt “standing zebra,” without any context, results in the correct interpretation of the zebra as an animal. 
+          (3) Using the original prompt but substituting the leaked concept with its uncontextualized representation yields the desired image.
+        </figcaption>
         </figure>
+      <p>
+        In practice, this patching step significantly reduces misinterpretations. By restoring each item’s “clean” encoding, we ensure that contextual cues do not unintentionally override the core meaning of an entity. 
+      </p>
       </div>
     </div>
   </section>
@@ -242,7 +278,7 @@
         <figure>
           <img src="static/images/Catastrophic_negligence.png" alt="Examples of catastrophic negligence where key concepts are omitted.">
           <figcaption>
-            Despite accurate encoding, some items are entirely missing from the generated image.
+            Despite accurate encoding, some items are entirely missing from the generated image of the relevant tokens.
           </figcaption>
         </figure>
       </div>
