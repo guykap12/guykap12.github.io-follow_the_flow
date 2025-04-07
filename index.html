@@ -316,6 +316,124 @@ We demonstrate the redundancy of these tokens by removing them after textual enc
     </div>
   </section>
 
+
+  <section id="related-works">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Related Works</h2>
+    
+    <!-- Related Work 1: Attend-and-Excite -->
+    <div class="columns is-vcentered">
+      <div class="column is-8">
+        <h3 class="title is-4">
+          <a href="https://yuval-alaluf.github.io/Attend-and-Excite/" target="_blank">
+            Attend-and-Excite: Attention-Based Semantic Guidance for T2I Diffusion Models
+          </a>
+        </h3>
+        <p class="subtitle is-6">Chefer et al., 2023</p>
+        <p>
+          This influential work introduces an approach that enhances image generation by optimizing attention maps to focus on neglected entities. Its method for mitigating semantic leakage and improving attribute binding has inspired subsequent research.
+        </p>
+      </div>
+      <div class="column is-4">
+        <div class="box">
+          <iframe src="https://github.com/chefer/attend-and-excite" 
+                  style="width:100%; height:200px; border:0;" 
+                  title="Attend-and-Excite Project Preview"></iframe>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Related Work 2: padding-tone -->
+    <div class="columns is-vcentered">
+      <div class="column is-8">
+        <h3 class="title is-4">
+          <a href="https://padding-tone.github.io/" target="_blank">
+            Padding Tone: A Mechanistic Analysis of Padding Tokens in T2I Models
+          </a>
+        </h3>
+        <p class="subtitle is-6">Toker et al., 2024</p>
+        <p>
+          This work offers a detailed analysis of how padding tokens impact token representations in text-to-image models. Its insights have been crucial for our approach, inspiring the use of pad embeddings in our intervention method to effectively identify and remove redundant tokens.
+        </p>
+      </div>
+      <div class="column is-4">
+        <div class="box">
+          <iframe src="https://github.com/tokeron/lens" 
+                  style="width:100%; height:200px; border:0;" 
+                  title="Diffusion Lens Project Preview"></iframe>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Related Work 3: Patchscopes -->
+    <div class="columns is-vcentered">
+      <div class="column is-8">
+        <h3 class="title is-4">
+          <a href="https://research.google/blog/patchscopes-a-unifying-framework-for-inspecting-hidden-representations-of-language-models/" target="_blank">
+            Patchscopes: A Framework for Inspecting Hidden Representations
+          </a>
+        </h3>
+        <p class="subtitle is-6">Ghandeharioun et al., 2024</p>
+        <p>
+          Patchscopes provides a unified approach for visualizing and interpreting hidden token representations in language models. Its techniques support analyses of semantic leakage and help guide token-level interventions.
+        </p>
+      </div>
+      <div class="column is-4">
+        <div class="box">
+          <iframe src="https://example.com/patchscopes" 
+                  style="width:100%; height:200px; border:0;" 
+                  title="Patchscopes Project Preview"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- Related Work: From Tokens to Words -->
+    <div class="columns is-vcentered">
+      <div class="column is-8">
+        <h3 class="title is-4">
+          <a href="https://arxiv.org/pdf/2410.05864" target="_blank">
+            From Tokens to Words: On the Inner Lexicon of LLMs
+          </a>
+        </h3>
+        <p class="subtitle is-6">Kaplan et al., 2025</p>
+        <p>
+          This influential study investigates how subword tokens are fused into coherent word-level representations—a process known as implicit detokenization. Its findings laid the groundwork for our analysis of information concentration across tokens, informing our methods for isolating representative tokens in T2I pipelines.
+        </p>
+      </div>
+      <div class="column is-4">
+        <div class="box">
+          <iframe src="https://arxiv.org/abs/2410.05864" 
+                  style="width:100%; height:200px; border:0;" 
+                  title="From Tokens to Words Project Preview"></iframe>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Related Work 4: DALLE-2 Analysis -->
+    <div class="columns is-vcentered">
+      <div class="column is-8">
+        <h3 class="title is-4">
+          <a href="pdf" target="_blank">
+            DALLE-2: Examining Word-to-Concept Mapping in T2I Models
+          </a>
+        </h3>
+        <p class="subtitle is-6">Rassin et al., 2022</p>
+        <p>
+          This work critically analyzes how text-to-image models map words to visual concepts, exposing challenges such as semantic leakage and misbinding of attributes. Its findings have driven further research into token-level information flow.
+        </p>
+      </div>
+      <div class="column is-4">
+        <div class="box">
+          <iframe src="https://example.com/dalle2" 
+                  style="width:100%; height:200px; border:0;" 
+                  title="DALLE-2 Project Preview"></iframe>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</section>
+
   <!-- BibTeX citation -->
   <section class="section" id="BibTeX">
     <div class="container is-max-desktop content">
